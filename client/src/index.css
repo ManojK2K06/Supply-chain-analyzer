@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;500;700;900&display=swap');
+
+:root {
+  --bg-void: #020508;
+  --bg-deep: #060d14;
+  --bg-panel: #0a1520;
+  --bg-card: #0d1b28;
+  --bg-card-hover: #112233;
+  --border: rgba(220, 30, 30, 0.25);
+  --border-bright: rgba(220, 30, 30, 0.6);
+  --red-core: #dc1e1e;
+  --red-bright: #ff2222;
+  --red-glow: rgba(220, 30, 30, 0.4);
+  --red-dim: rgba(220, 30, 30, 0.15);
+  --yellow-war: #f59e0b;
+  --yellow-glow: rgba(245, 158, 11, 0.4);
+  --green-safe: #10b981;
+  --green-glow: rgba(16, 185, 129, 0.4);
+  --text-primary: #e8eaf0;
+  --text-secondary: #8899aa;
+  --text-dim: #445566;
+  --text-red: #ff4444;
+  --font-display: 'Orbitron', monospace;
+  --font-ui: 'Rajdhani', sans-serif;
+  --font-mono: 'Share Tech Mono', monospace;
+  --sidebar-w: 340px;
+  --header-h: 64px;
+  --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body, #root {
+  height: 100%;
+  background: var(--bg-void);
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  font-size: 15px;
+  overflow: hidden;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { background: var(--red-core); border-radius: 2px; }
+
+/* Leaflet overrides */
+.leaflet-container {
+  background: #000 !important;
+  font-family: var(--font-ui) !important;
+}
+.leaflet-control-attribution { display: none !important; }
+.leaflet-control-zoom a {
+  background: var(--bg-panel) !important;
+  border-color: var(--border) !important;
+  color: var(--red-core) !important;
+}
+.leaflet-popup-content-wrapper {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-bright) !important;
+  border-radius: 4px !important;
+  box-shadow: 0 0 24px var(--red-glow) !important;
+}
+.leaflet-popup-tip { background: var(--bg-card) !important; }
+.leaflet-popup-content { color: var(--text-primary) !important; margin: 0 !important; }
+.leaflet-popup-close-button { color: var(--text-secondary) !important; }
+
+/* Scan-line overlay */
+.scanlines {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.04) 2px,
+    rgba(0, 0, 0, 0.04) 4px
+  );
+}
+
+@keyframes pulse-red {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.15); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from { transform: translateX(-100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes radar-sweep {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-pulse-red { animation: pulse-red 2s ease-in-out infinite; }
+.animate-blink { animation: blink 1s step-end infinite; }
+.animate-fade-in { animation: fadeIn 0.3s ease forwards; }
+
+/* Conflict marker styles */
+.conflict-marker-war, .conflict-marker-potential, .conflict-marker-stable {
+  border-radius: 50%;
+  border: 2px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.conflict-marker-war {
+  background: rgba(220, 30, 30, 0.8);
+  border-color: #ff2222;
+  box-shadow: 0 0 16px rgba(255, 34, 34, 0.8), 0 0 40px rgba(255, 34, 34, 0.4);
+  animation: pulse-red 1.5s ease-in-out infinite;
+}
+.conflict-marker-potential {
+  background: rgba(245, 158, 11, 0.75);
+  border-color: #f59e0b;
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.7), 0 0 40px rgba(245, 158, 11, 0.3);
+  animation: pulse-red 2.5s ease-in-out infinite;
+}
+.conflict-marker-stable {
+  background: rgba(16, 185, 129, 0.75);
+  border-color: #10b981;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.6);
+}
+
+.military-marker {
+  background: rgba(100, 180, 255, 0.7);
+  border: 1px solid #64b4ff;
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(100, 180, 255, 0.5);
+}

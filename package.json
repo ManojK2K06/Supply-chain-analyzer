@@ -1,0 +1,14 @@
+{
+  "name": "geopolitical-radar",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "install:all": "cd server && npm install && cd ../client && npm install",
+    "start:server": "cd server && node index.js",
+    "start:client": "cd client && npm run dev",
+    "start": "concurrently \"npm run start:server\" \"npm run start:client\""
+  },
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
