@@ -4,7 +4,9 @@
     {
       "src": "client/package.json",
       "use": "@vercel/static-build",
-      "config": { "distDir": "build" } 
+      "config": {
+        "distDir": "dist"
+      }
     },
     {
       "src": "server/index.js",
@@ -12,13 +14,13 @@
     }
   ],
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/server/index.js" },
-    { "source": "/(.*)", "destination": "/client/build/$1" }
-  ],
-  "crons": [
     {
-      "path": "/api/refresh",
-      "schedule": "*/30 * * * *"
+      "source": "/api/(.*)",
+      "destination": "/server/index.js"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/client/dist/$1"
     }
   ]
 }
