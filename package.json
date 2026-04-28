@@ -8,7 +8,7 @@
     "start:client": "cd client && npm run build",
     "start": "concurrently \"npm run start:server\" \"npm run start:client\""
   },
-  "dependencies": {
-    "concurrently": "^8.2.2"
+  "devDependencies": {
+    "concurrently": "^9.2.1"
   }
 }
